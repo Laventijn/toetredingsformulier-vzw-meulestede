@@ -1,4 +1,5 @@
 @echo off
+setlocal
 REM Pusht dit project naar GitHub via HTTPS.
 REM Zorg dat de GitHub-repository al bestaat:
 REM https://github.com/Laventijn/toetredingsformulier-vzw-meulestede
@@ -18,10 +19,37 @@ for /f %%i in ('git status --porcelain') do (
   exit /b 1
 )
 
-:push
-git remote remove origin 2>nul
-git remote add origin "%REMOTE_URL%"
+git remote get-url origin >nul 2>nul
+if errorlevel 1 (
+  git remote add origin "%REMOTE_URL%"
+) else (
+  git remote set-url origin "%REMOTE_URL%"
+)
+
+git fetch origin main
+if errorlevel 1 (
+  echo.
+  echo Fout: kon de GitHub-repository niet ophalen.
+  exit /b 1
+)
+
+git merge-base --is-ancestor origin/main main
+if errorlevel 1 (
+  echo.
+  echo Let op: GitHub bevat commits die lokaal nog niet gemerged zijn.
+  echo Run eerst:
+  echo git merge origin/main --allow-unrelated-histories
+  echo.
+  echo Los eventuele conflicten op, run scripts\bewaar-lokaal.bat, en probeer opnieuw.
+  exit /b 1
+)
+
 git push -u origin main
+if errorlevel 1 (
+  echo.
+  echo Fout: push naar GitHub is mislukt.
+  exit /b 1
+)
 
 echo.
 echo Gepusht naar %REMOTE_URL%
