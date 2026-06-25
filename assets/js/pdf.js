@@ -37,24 +37,98 @@
     return y;
   }
 
+  function drawPdfHeader(doc, pageWidth) {
+    doc.setFillColor(31, 78, 121);
+    doc.rect(0, 0, pageWidth, 26, "F");
+
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(20);
+    doc.text("VZW Meulestede", 14, 11);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+    doc.text("Toetredingsformulier lidmaatschap Algemene Vergadering", 14, 18);
+
+    doc.setFontSize(10);
+    doc.text("Meulesteedsesteenweg 517", pageWidth - 14, 10, { align: "right" });
+    doc.text("9000 Gent", pageWidth - 14, 15, { align: "right" });
+    doc.text("info@meulestede.gent", pageWidth - 14, 20, { align: "right" });
+
+    doc.setTextColor(0, 0, 0);
+  }
+
+  function drawBoardReservedSection(doc, startY, pageWidth, margin) {
+    const x = margin;
+    const w = pageWidth - margin * 2;
+    let y = startY;
+
+    doc.setDrawColor(170);
+    doc.setFillColor(248, 248, 248);
+    doc.rect(x, y, w, 78, "FD");
+
+    y += 8;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+    doc.setTextColor(90);
+    doc.text("Voorbehouden voor het bestuur van vzw Meulestede", x + 4, y);
+
+    y += 8;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(40);
+
+    doc.rect(x + 4, y, 44, 12);
+    doc.text("Ontvangen op", x + 5, y + 7);
+    doc.rect(x + 48, y, 44, 12);
+    doc.rect(x + 92, y, 44, 12);
+    doc.text("Door", x + 93, y + 7);
+    doc.rect(x + 136, y, 44, 12);
+
+    y += 18;
+
+    doc.rect(x + 4, y, 44, 12);
+    doc.text("Behandeld door", x + 5, y + 7);
+    doc.rect(x + 48, y, 44, 12);
+    doc.rect(x + 92, y, 44, 12);
+    doc.text("Datum AV-", x + 93, y + 5);
+    doc.text("bekrachtiging", x + 93, y + 9);
+    doc.rect(x + 136, y, 44, 12);
+
+    y += 18;
+
+    doc.rect(x + 4, y, 10, 10);
+    doc.rect(x + 14, y, w - 18, 10);
+    doc.text("Aanvaard door de AV", x + 17, y + 6.5);
+
+    y += 10;
+
+    doc.rect(x + 4, y, 10, 10);
+    doc.rect(x + 14, y, w - 18, 10);
+    doc.text("Geweigerd / uitgesteld (zie notities)", x + 17, y + 6.5);
+
+    y += 16;
+
+    doc.setFont("helvetica", "bold");
+    doc.text("Notities:", x + 4, y);
+    y += 3;
+    doc.rect(x + 4, y, w - 8, 18);
+
+    doc.setTextColor(0, 0, 0);
+    return y + 22;
+  }
+
   window.generateMembershipPdf = function generateMembershipPdf(form) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ unit: "mm", format: "a4" });
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
     const left = 18;
     const maxWidth = 174;
-    let y = 18;
+    let y = 36;
 
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(16);
-    doc.text("vzw Meulestede", left, y);
-    y += 8;
-    doc.setFontSize(13);
-    doc.text("Toetredingsformulier lidmaatschap Algemene Vergadering", left, y);
-    y += 8;
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(9);
-    doc.text("Meulesteedsesteenweg 517, 9000 Gent · info@meulestede.gent", left, y);
-    y += 11;
+    drawPdfHeader(doc, pageWidth);
 
     doc.setFontSize(11);
     doc.setFont("helvetica", "bold");
@@ -146,6 +220,14 @@
     doc.setFontSize(9);
     doc.text("Handtekening", left, y);
     doc.text("Stempel, optioneel", left + 98, y);
+
+    y += 10;
+    if (y > pageHeight - 95) {
+      doc.addPage();
+      y = 20;
+    }
+
+    drawBoardReservedSection(doc, y + 6, pageWidth, 14);
 
     const safeOrg = value(form, "org_name").replace(/[^a-z0-9-_]+/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "aanvraag";
     const fileName = `toetredingsformulier-vzw-meulestede-${safeOrg}.pdf`;
