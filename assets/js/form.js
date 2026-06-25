@@ -55,7 +55,7 @@
       iframeLoadedOnce = true;
       return;
     }
-    setStatus("Aanvraag verzonden. Download de PDF indien u dat nog niet deed.", "success");
+    setStatus("Aanvraag verzonden ter verwerking. Download de PDF indien u dat nog niet deed.", "success");
     form.reset();
     setDefaults();
   });

@@ -94,6 +94,10 @@ function doPost(e) {
   }
 }
 
+function doGet() {
+  return HtmlService.createHtmlOutput('<!doctype html><html><body>OK - vzw Meulestede formulier backend actief</body></html>');
+}
+
 function createVCardsFromAll() {
   const sheet = getSheet_();
   const values = sheet.getDataRange().getValues();
