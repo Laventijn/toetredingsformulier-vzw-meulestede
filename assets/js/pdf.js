@@ -8,7 +8,7 @@
 
   function checked(form, name) {
     const field = form.elements[name];
-    return field && field.checked ? "☑" : "☐";
+    return field && field.checked ? "[x]" : "[ ]";
   }
 
   function addWrapped(doc, label, text, x, y, maxWidth) {
@@ -61,11 +61,12 @@
   function drawBoardReservedSection(doc, startY, pageWidth, margin) {
     const x = margin;
     const w = pageWidth - margin * 2;
+    const h = 112;
     let y = startY;
 
     doc.setDrawColor(170);
     doc.setFillColor(248, 248, 248);
-    doc.rect(x, y, w, 78, "FD");
+    doc.rect(x, y, w, h, "FD");
 
     y += 8;
     doc.setFont("helvetica", "bold");
@@ -79,22 +80,22 @@
     doc.setFontSize(10);
     doc.setTextColor(40);
 
-    doc.rect(x + 4, y, 44, 12);
+    doc.rect(x + 4, y, 42, 12);
     doc.text("Ontvangen op", x + 5, y + 7);
-    doc.rect(x + 48, y, 44, 12);
-    doc.rect(x + 92, y, 44, 12);
-    doc.text("Door", x + 93, y + 7);
-    doc.rect(x + 136, y, 44, 12);
+    doc.rect(x + 46, y, 48, 12);
+    doc.rect(x + 98, y, 34, 12);
+    doc.text("Door", x + 99, y + 7);
+    doc.rect(x + 132, y, w - 136, 12);
 
     y += 18;
 
-    doc.rect(x + 4, y, 44, 12);
+    doc.rect(x + 4, y, 42, 12);
     doc.text("Behandeld door", x + 5, y + 7);
-    doc.rect(x + 48, y, 44, 12);
-    doc.rect(x + 92, y, 44, 12);
-    doc.text("Datum AV-", x + 93, y + 5);
-    doc.text("bekrachtiging", x + 93, y + 9);
-    doc.rect(x + 136, y, 44, 12);
+    doc.rect(x + 46, y, 48, 12);
+    doc.rect(x + 98, y, 34, 12);
+    doc.text("Datum AV-", x + 99, y + 5);
+    doc.text("bekrachtiging", x + 99, y + 9);
+    doc.rect(x + 132, y, w - 136, 12);
 
     y += 18;
 
@@ -108,15 +109,15 @@
     doc.rect(x + 14, y, w - 18, 10);
     doc.text("Geweigerd / uitgesteld (zie notities)", x + 17, y + 6.5);
 
-    y += 16;
+    y += 14;
 
     doc.setFont("helvetica", "bold");
     doc.text("Notities:", x + 4, y);
-    y += 3;
-    doc.rect(x + 4, y, w - 8, 18);
+    y += 4;
+    doc.rect(x + 4, y, w - 8, 22);
 
     doc.setTextColor(0, 0, 0);
-    return y + 22;
+    return startY + h;
   }
 
   window.generateMembershipPdf = function generateMembershipPdf(form) {
@@ -222,7 +223,7 @@
     doc.text("Stempel, optioneel", left + 98, y);
 
     y += 10;
-    if (y > pageHeight - 95) {
+    if (y > pageHeight - 125) {
       doc.addPage();
       y = 20;
     }
