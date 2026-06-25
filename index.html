@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Toetredingsformulier AV – vzw Meulestede</title>
+  <meta name="description" content="Online toetredingsformulier voor kandidaat-leden van de Algemene Vergadering van vzw Meulestede." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <p class="eyebrow">vzw Meulestede</p>
+      <h1>Toetredingsformulier lidmaatschap Algemene Vergadering</h1>
+      <p class="lead">Met dit formulier vraagt uw vereniging of organisatie toetreding aan als lid van de Algemene Vergadering van vzw Meulestede. Het bestuur behandelt de aanvraag en de Algemene Vergadering bekrachtigt.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card notice">
+      <h2>Voor u start</h2>
+      <p>U kunt na het invullen zelf een PDF downloaden. Na indienen komt de aanvraag terecht bij de backoffice van vzw Meulestede.</p>
+      <p class="small">Privacy: de gegevens worden enkel gebruikt voor de behandeling van de kandidatuur, ledenadministratie en communicatie over het lidmaatschap.</p>
+    </section>
+
+    <form id="membershipForm" class="card form" method="POST" target="hiddenSubmitFrame" novalidate>
+      <input type="hidden" name="form_version" value="2026-06-26" />
+      <input type="hidden" name="source" value="github-pages" />
+      <input type="hidden" name="submitted_at_client" id="submitted_at_client" />
+
+      <section>
+        <h2>1. Gegevens van de vereniging / organisatie</h2>
+        <div class="grid two">
+          <label>Naam van de vereniging *
+            <input name="org_name" required autocomplete="organization" />
+          </label>
+          <label>Rechtsvorm
+            <input name="legal_form" placeholder="vzw, feitelijke vereniging, coöperatieve..." />
+          </label>
+          <label>Ondernemingsnummer
+            <input name="enterprise_number" inputmode="numeric" placeholder="indien van toepassing" />
+          </label>
+          <label>Website / sociale media
+            <input name="website" type="url" placeholder="https://..." />
+          </label>
+          <label class="wide">Adres / maatschappelijke zetel
+            <input name="address" autocomplete="street-address" />
+          </label>
+          <label>Postcode
+            <input name="postal_code" autocomplete="postal-code" />
+          </label>
+          <label>Gemeente
+            <input name="city" autocomplete="address-level2" />
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2>2. Contactpersoon en afgevaardigde voor de AV</h2>
+        <div class="grid two">
+          <label>Voornaam *
+            <input name="first_name" required autocomplete="given-name" />
+          </label>
+          <label>Familienaam *
+            <input name="last_name" required autocomplete="family-name" />
+          </label>
+          <label>Functie binnen de vereniging
+            <input name="role" />
+          </label>
+          <label>E-mailadres *
+            <input name="email" type="email" required autocomplete="email" />
+          </label>
+          <label>Telefoonnummer
+            <input name="phone" type="tel" autocomplete="tel" />
+          </label>
+          <label>GSM
+            <input name="mobile" type="tel" autocomplete="tel" />
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2>3. Werking en maatschappelijk doel</h2>
+        <label>Korte omschrijving van de werking van uw vereniging *
+          <textarea name="working_description" required rows="5"></textarea>
+        </label>
+        <label>In welke mate sluit uw werking aan bij het maatschappelijk doel van vzw Meulestede?
+          <textarea name="goal_alignment" rows="5" placeholder="Gemeenschapsvorming, armoedebestrijding, buurtwerking, cultuur, ontmoeting..."></textarea>
+        </label>
+      </section>
+
+      <section>
+        <h2>4. Engagementen als lid van de Algemene Vergadering</h2>
+        <p>Gelieve de engagementen te bevestigen.</p>
+        <div class="checks">
+          <label><input type="checkbox" name="engagement_goal" value="ja" required /> Wij onderschrijven het maatschappelijk doel van vzw Meulestede: gemeenschapsvorming en armoedebestrijding.</label>
+          <label><input type="checkbox" name="engagement_activity" value="ja" required /> Wij organiseren minstens één activiteit per jaar binnen het patrimonium van vzw Meulestede, die aansluit bij dit maatschappelijk doel.</label>
+          <label><input type="checkbox" name="engagement_delegate" value="ja" required /> Wij vaardigen een vaste vertegenwoordiger af naar de Algemene Vergadering en zorgen bij verhindering voor bericht, volmacht of vervanger.</label>
+          <label><input type="checkbox" name="engagement_updates" value="ja" required /> Wij communiceren relevante informatie en wijzigingen tijdig door aan het secretariaat.</label>
+          <label><input type="checkbox" name="engagement_rules" value="ja" required /> Wij respecteren de statuten en het huishoudelijk reglement van vzw Meulestede.</label>
+        </div>
+      </section>
+
+      <section>
+        <h2>5. Lidgeld</h2>
+        <p>Er wordt geen lidgeld gevraagd.</p>
+      </section>
+
+      <section>
+        <h2>6. Gesteund door</h2>
+        <p>Geef de namen op van AV-leden die de kandidatuur steunen. Handtekeningen kunnen later op de PDF worden aangevuld indien nodig.</p>
+        <div class="grid two">
+          <label>Steunend AV-lid 1
+            <input name="supporter_1" />
+          </label>
+          <label>Steunend AV-lid 2
+            <input name="supporter_2" />
+          </label>
+          <label>Steunend AV-lid 3
+            <input name="supporter_3" />
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2>7. Ondertekening</h2>
+        <div class="grid two">
+          <label>Naam ondertekenaar *
+            <input name="signatory_name" required />
+          </label>
+          <label>Datum *
+            <input name="submission_date" type="date" required />
+          </label>
+        </div>
+        <div class="checks">
+          <label><input type="checkbox" name="legal_confirmation" value="ja" required /> Ik bevestig dat ik rechtsgeldig gemachtigd ben om deze vereniging of organisatie te vertegenwoordigen en dat de ingevulde gegevens correct zijn.</label>
+          <label><input type="checkbox" name="privacy_consent" value="ja" required /> Ik ga akkoord dat vzw Meulestede deze gegevens gebruikt voor de behandeling van de kandidatuur en verdere ledenadministratie.</label>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="button" id="downloadPdfBtn" class="secondary">Download ingevulde PDF</button>
+        <button type="submit" class="primary">Indienen bij vzw Meulestede</button>
+      </div>
+      <p id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+    <iframe name="hiddenSubmitFrame" id="hiddenSubmitFrame" title="Verborgen formulierverzending" class="hidden"></iframe>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>vzw Meulestede · Meulesteedsesteenweg 517, 9000 Gent · info@meulestede.gent</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js" integrity="sha256-FB0r3I1W1GIYLHnbksfdiFXTSZbX2dPLaLkTt+s0eAQ=" crossorigin="anonymous"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/pdf.js"></script>
+  <script src="assets/js/form.js"></script>
+</body>
+</html>
