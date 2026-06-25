@@ -11,12 +11,21 @@ Open `http://localhost:8080`.
 
 ## Git init en push
 
+Windows batch scripts:
+
+```bat
+scripts\bewaar-lokaal.bat
+scripts\push-github.bat
+```
+
+Of handmatig:
+
 ```bash
 git init
 git add .
 git commit -m "Init online toetredingsformulier"
 git branch -M main
-git remote add origin git@github.com:Laventijn/toetredingsformulier-vzw-meulestede.git
+git remote add origin https://github.com/Laventijn/toetredingsformulier-vzw-meulestede.git
 git push -u origin main
 ```
 
